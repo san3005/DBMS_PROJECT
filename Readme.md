@@ -406,7 +406,7 @@ Seller token- `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NzRkMmQ4NTAwODUy
 ``` json
 {
     "Name":"Sample User3",
-    "Email":"Santhoshgurajada01000@gmail.com",
+    "Email":"temp@gmail.com",
     "Password":"1234@Password"
 }
 
