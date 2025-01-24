@@ -1,0 +1,262 @@
+{
+	"info": {
+		"_postman_id": "a01e272b-2c84-4631-8cb0-8bb109fb0aa4",
+		"name": "User Endpoints",
+		"description": "Few User tokens-`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NzYxNjM0NDIwOGU4YzIyMTM1YjQyOCIsImlhdCI6MTcwMjIzNzc0OCwiZXhwIjoxNzA0ODI5NzQ4fQ.X_EOa0ydAKJG6_ByKfPLJsk2u90OXY9SfUjzN-coi2I`\n\n`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NzYxNjczNDIwOGU4YzIyMTM1YjQyZiIsImlhdCI6MTcwMjIzNzgxMiwiZXhwIjoxNzA0ODI5ODEyfQ.rCMmSKBXD0U5EMXxbDyIYfExt7HhcIp_wLwpZ7aOnRA`\n\n`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NzYxODZlNDIwOGU4YzIyMTM1YjQ0NiIsImlhdCI6MTcwMjIzODMxOSwiZXhwIjoxNzA0ODMwMzE5fQ.8JQ3styCHPKfM0OAlzDeIcKtDjcLeUBhmPP1GYnvpc4`\n\n`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NzRkMmRhNTAwODUyYWM0N2U5ZDg0ZiIsImlhdCI6MTcwMjIzODQ4MSwiZXhwIjoxNzA0ODMwNDgxfQ.OtWzT7W96mwZo_IVHlOG9p80PML3z3z_8XePygZR3iQ`\n\n### How to Use JWT Bearer Token:\n\nTo use a JWT bearer token for accessing endpoints that require authentication:\n\n1. Obtain the JWT token (it is provided after a successful login).\n2. In Postman or a similar tool, select the appropriate HTTP method and enter the endpoint URL.\n3. In the request headers section, set the key to `Authorization`.\n4. Set the prefix as `Bearer` , for the admin token.\n5. Send the request to interact with the endpoint.\n    \n\nIt should look like this:\n\n<img src=\"https://content.pstmn.io/3cf66096-a9b6-4a76-9536-ca126d156e7c/U2NyZWVuc2hvdCAyMDIzLTEyLTEwIGF0IDEuMDUuMzPigK9QTS5wbmc=\" alt=\"JWT%20Bearer%20Token%20in%20the%20Authorization%20Header\" width=\"616\" height=\"212\">\n\n### User Endpoints:\n\n\n#### 1\\. GET `/`\n\n- **Description**: Fetches a list of all products.\n- **Authorization**: No authentication required.\n- **Usage**:\n    - Method: GET\n    - Endpoint: `http://localhost:8001/products/`\n\n#### 2\\. GET `/:id`\n\n- **Description**: Retrieves detailed information about a single product by product ID.\n- **Authorization**: No authentication required.\n- **Usage**:\n    - Method: GET\n    - Endpoint: `http://localhost:8001/products/:id` (Replace `:id` with the product's ID)\n\n#### 3\\. POST `/:productId/reviews`\n\n- **Description**: Adds a review for a specific product.\n- **Authorization**: Requires user authentication.\n- **Usage**:\n    - Method: POST\n    - Endpoint: `http://localhost:8001/products/:ProductId/reviews` (Replace `:productId` with the product's ID)\n    - Headers: Authorization: Bearer user_token(Replace user_token with the any of the above user tokens or the token generated after registration or login)\n    - Body: JSON data containing review details as below\n\n``` json\n{\n    \"rating\":5,\n    \"comment\":\"good product\"\n}\n\n ```\n\n#### 4\\. POST `/loginuser`\n\n- **Description**: Authenticates a user and provides a JWT token for subsequent requests.\n- **Authorization**: No authentication required for login itself.\n- **Usage**:\n    - Method: POST\n    - Endpoint: `http://localhost:8001/users/loginuser`\n    - Body: JSON data with user credentials as displayed below\n\n``` json\n{\n    \"Email\": \"atozas@ugucef.gh\",\n    \"Password\": \"SXWWf#HSq1TM\"\n}\n\n ```\n\n#### 5\\. GET `/userprofile`\n\n- **Description**: Retrieves the profile information of the authenticated user.\n- **Authorization**: Requires user authentication.\n- **Usage**:\n    - Method: GET\n    - Endpoint: `http://localhost:8001/users/userprofile`\n    - Headers: Authorization: Bearer user_token(Replace user_token with the any of the above user tokens or the token generated after registration or login)\n\n#### 6\\. POST `/`\n\n- **Description**: Creates a new order.\n- **Authorization**: Requires user authentication.\n- **Usage**:\n    - Method: POST\n    - Endpoint: `http://localhost:8001/orders/`\n    - Headers: Authorization: Bearer user_token(Replace user_token with the any of the above user tokens or the token generated after registration or login)\n    - Body: JSON data containing order details\n\n``` json\n{\n    \"orderedList\": [\n        {\n            \"product\": \"6574d65821f714fa3fe75d7c\",\n            \"qty\": 2\n        },\n        {\n            \"product\": \"6574d65821f714fa3fe75d7e\",\n            \"qty\": 10\n        }\n    ],\n    \"shippingAddress\": {\n        \"address\": \"123 Main St\",\n        \"city\": \"Exampleville\",\n        \"postalCode\": \"12345\",\n        \"country\": \"United States\"\n    },\n    \"payment\": {\n        \"amount\": 2000,\n        \"paymentMethod\": \"Credit\",\n        \"status\": \"Processed\",\n        \"CardNumber\": 1234567890876543,\n        \"CVC\": \"1786\",\n        \"ExpirationDate\": \"08/28\"\n    }\n}\n\n ```\n\n#### 7\\. GET `/myorders`\n\n- **Description**: Retrieves a list of orders placed by the authenticated user.\n- **Authorization**: Requires user authentication.\n- **Usage**:\n    - Method: GET\n    - Endpoint: `http://localhost:8001/orders/myorders`\n    - Headers: Authorization: Bearer user_token(Replace user_token with the any of the above user tokens or the token generated after registration or login)\n\n#### 8\\. POST `/Registration`\n\n- **Description**: Registers a new user.\n- **Authorization**: No authentication required for registration.\n- **Usage**:\n    - Method: POST\n    - Endpoint: `http://localhost:8001/users/registration`\n    - Body: JSON data with user registration details\n\n``` json\n{\n    \"Name\":\"Sample User3\",\n    \"Email\":\"Santhoshgurajada01000@gmail.com\",\n    \"Password\":\"1234@Password\"\n}\n\n ```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18581397"
+	},
+	"item": [
+		{
+			"name": "Registrating users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Name\":\"Sample User3\",\n    \"Email\":\"Santhoshgurajada0100@gmail.com\",\n    \"Password\":\"1234@Password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8001/users/registration",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"users",
+						"registration"
+					]
+				},
+				"description": "- **Description**: Registers a new user.\n- **Authorization**: No authentication required for registration.\n- **Usage**:\n    \n    - Method: POST\n    - Endpoint: `http://localhost:8001/users/registration`\n        \n    - Body: JSON data with user registration details as displayed below."
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Email\": \"Santhoshgurajada0100@gmail.com\",\n    \"Password\": \"1234@Password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8001/users/loginuser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"users",
+						"loginuser"
+					]
+				},
+				"description": "- **Description**: Authenticates a user and provides a JWT token for subsequent requests.\n    \n- **Authorization**: No authentication required for login itself.\n    \n- **Usage**:\n    \n    - Method: POST\n        \n    - Endpoint: `http://localhost:8001/users/loginuser`"
+			},
+			"response": []
+		},
+		{
+			"name": "User Profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NzYxNjM0NDIwOGU4YzIyMTM1YjQyOCIsImlhdCI6MTcwMjIzNzc0OCwiZXhwIjoxNzA0ODI5NzQ4fQ.X_EOa0ydAKJG6_ByKfPLJsk2u90OXY9SfUjzN-coi2I",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8001/users/userprofile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"users",
+						"userprofile"
+					]
+				},
+				"description": "- **Description**: Retrieves the profile information of the authenticated user.\n- **Authorization**: Requires user authentication.\n- **Usage**:\n    \n    - Method: GET\n    - Endpoint: `http://localhost:8001/users/userprofile`\n        \n    - Headers: Authorization: Bearer user_token(Replace user_token with the any of the above user tokens or the token generated after login or registration)"
+			},
+			"response": []
+		},
+		{
+			"name": "View All Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/products/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"products",
+						""
+					]
+				},
+				"description": "- **Description**: Fetches a list of all products.\n    \n- **Authorization**: No authentication required.\n    \n- **Usage**:\n    \n    - Method: GET\n        \n    - Endpoint: `http://localhost:8001/products/`"
+			},
+			"response": []
+		},
+		{
+			"name": "View Single Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/products/6574d66121f714fa3fe75db8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"products",
+						"6574d66121f714fa3fe75db8"
+					]
+				},
+				"description": "- **Description**: Retrieves detailed information about a single product by product ID.\n    \n- **Authorization**: No authentication required.\n    \n- **Usage**:\n    \n    - Method: GET\n        \n    - Endpoint: `http://localhost:8001/products/:id` (Replace `:id` with the product's ID)"
+			},
+			"response": []
+		},
+		{
+			"name": "User Posting a Review",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NzYxODZlNDIwOGU4YzIyMTM1YjQ0NiIsImlhdCI6MTcwMjIzODMxOSwiZXhwIjoxNzA0ODMwMzE5fQ.8JQ3styCHPKfM0OAlzDeIcKtDjcLeUBhmPP1GYnvpc4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \"rating\":5,\n    \"comment\":\"good product\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8001/products/6574d66221f714fa3fe75dc0/reviews",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"products",
+						"6574d66221f714fa3fe75dc0",
+						"reviews"
+					]
+				},
+				"description": "- **Description**: Adds a review for a specific product.\n    \n- **Authorization**: Requires user authentication.\n    \n- **Usage**:\n    \n    - Method: POST\n        \n    - Endpoint:`http://localhost:8001/products/:productID/reviews` (Replace `:productId` with the product's ID)\n        \n    - Headers: Authorization: Bearer user_token(Replace user_token with the any of the above user tokens or the token generated after login or registration)"
+			},
+			"response": []
+		},
+		{
+			"name": "Getting the logged in user orders",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NzRkMmRhNTAwODUyYWM0N2U5ZDg0ZiIsImlhdCI6MTcwMjIzODQ4MSwiZXhwIjoxNzA0ODMwNDgxfQ.OtWzT7W96mwZo_IVHlOG9p80PML3z3z_8XePygZR3iQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8001/orders/myorders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"orders",
+						"myorders"
+					]
+				},
+				"description": "- **Description**: Retrieves a list of orders placed by the authenticated user.\n- **Authorization**: Requires user authentication.\n- **Usage**:\n    \n    - Method: GET\n    - Endpoint: `http://localhost:8001/orders/myorders`\n        \n    - Headers: Authorization: Bearer user_token(Replace user_token with the any of the above user tokens or the token generated after login or registration)"
+			},
+			"response": []
+		},
+		{
+			"name": "Creating an order",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NzYxNjM0NDIwOGU4YzIyMTM1YjQyOCIsImlhdCI6MTcwMjIzNzc0OCwiZXhwIjoxNzA0ODI5NzQ4fQ.X_EOa0ydAKJG6_ByKfPLJsk2u90OXY9SfUjzN-coi2I",
+						"description": "B",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"orderedList\": [\n        {\n            \"product\": \"6574d65821f714fa3fe75d7c\",\n            \"qty\": 2\n        },\n        {\n            \"product\": \"6574d65821f714fa3fe75d7e\",\n            \"qty\": 10\n        }\n    ],\n    \"shippingAddress\": {\n        \"address\": \"123 Main St\",\n        \"city\": \"Exampleville\",\n        \"postalCode\": \"12345\",\n        \"country\": \"United States\"\n    },\n    \"payment\": {\n        \"amount\": 2000,\n        \"paymentMethod\": \"Credit\",\n        \"status\": \"Processed\",\n        \"CardNumber\": 1234567890876543,\n        \"CVC\": \"1786\",\n        \"ExpirationDate\": \"08/28\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8001/orders/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"orders",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				},
+				"description": "- **Description**: Creates a new order.\n- **Authorization**: Requires user authentication.\n- **Usage**:\n    \n    - Method: POST\n    - Endpoint: [<code>http://localhost:8001/orders/</code>](http://localhost:8001/orders/)\n        \n    - Headers: Authorization: Bearer user_token(Replace user_token with the any of the above user tokens or the token generated after login or registration)\n    - Body: JSON data containing order details as displayed below"
+			},
+			"response": []
+		}
+	]
+}
