@@ -2,13 +2,6 @@
 # E-COMMERCE USING NOSQL DATABASE(MONGODB)
 We have developed the backend of E-commerce using MongoDB,Node.js and Express.js as a part of the coursework for the subject Database Management Systems.To make it user-centric we have made it secure and user friendly.We have included the hashing ,encrypting sensitive information and authentication for security and integrity.Along with the  security we have included features like invoice generation and e-mail notification to inform the users upon successful checkout.
 
----
-### Authors:
-- Santosh Gurajada
-- Sai Suraj Nuthanakalva
-- Hemanth Sai Pothuru
-### 
----
 
 
 ### Prerequisites:
